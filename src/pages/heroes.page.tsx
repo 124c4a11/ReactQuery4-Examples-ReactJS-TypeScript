@@ -1,16 +1,26 @@
-import { useQuery } from "@tanstack/react-query";
-import axios, { AxiosError } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
+import { useHeroesData } from "../hooks/useHeroesData";
 import { IHero } from "../types/IHero";
 
-const fetchHeroes = () =>
-  axios.get<IHero[]>("http://localhost:4000/superheroes");
+const onSuccess = (data: string[]) =>
+  console.log("Perform side effect after data fetching", data);
+
+const onError = (error: AxiosError) =>
+  console.log("Perform side effect after encountering error", error);
+
+const select = (data: AxiosResponse<IHero[]>) => {
+  const heroNames = data.data.map(({ name }) => name);
+
+  return heroNames;
+};
 
 export function HeroesPage() {
-  const { data, isInitialLoading, isError, error, refetch } = useQuery(
-    ["heroes"],
-    fetchHeroes,
-    { enabled: false }
-  );
+  const { data, isInitialLoading, isError, error, refetch } = useHeroesData({
+    enabled: false,
+    onError,
+    onSuccess,
+    select,
+  });
 
   return (
     <>
@@ -24,9 +34,9 @@ export function HeroesPage() {
         <h2>{(error as AxiosError).message}</h2>
       ) : (
         <>
-          {!!data?.data?.length && (
+          {!!data?.length && (
             <ul>
-              {data?.data.map(({ name }) => (
+              {data.map((name) => (
                 <li key={name}>{name}</li>
               ))}
             </ul>
