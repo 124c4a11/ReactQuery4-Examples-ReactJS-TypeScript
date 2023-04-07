@@ -2,7 +2,6 @@ import { Router, Link, Route, Routes } from "react-router-dom";
 import styles from "./App.module.scss";
 import { HomePage } from "./pages/home.page";
 import { HeroesPage } from "./pages/heroes.page";
-import { RQHeroesPage } from "./pages/rq-heroes.page";
 import { Container } from "./components/Container/Container";
 
 export function App() {
@@ -15,10 +14,7 @@ export function App() {
               <Link to="/">Home</Link>
             </li>
             <li className={styles["navbar__menu-item"]}>
-              <Link to="/super-heroes">Traditional Super Heroes</Link>
-            </li>
-            <li className={styles["navbar__menu-item"]}>
-              <Link to="/rq-super-heroes">RQ Super Heroes</Link>
+              <Link to="/heroes">Heroes</Link>
             </li>
           </ul>
         </Container>
@@ -27,8 +23,7 @@ export function App() {
         <Container>
           <Routes>
             <Route index element={<HomePage />} />
-            <Route path="/super-heroes" element={<HeroesPage />} />
-            <Route path="/rq-super-heroes" element={<RQHeroesPage />} />
+            <Route path="/heroes" element={<HeroesPage />} />
           </Routes>
         </Container>
       </main>
