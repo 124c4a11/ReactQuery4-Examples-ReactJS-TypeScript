@@ -1,0 +1,17 @@
+.navbar {
+  padding: 30px 0;
+  margin-block-start: 0;
+  background-color: blanchedalmond;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.navbar__menu {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navbar__menu-item { margin-right: 16px; }
+
+.main { padding: 30px 0; }
