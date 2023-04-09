@@ -2,6 +2,7 @@ import { Router, Link, Route, Routes } from "react-router-dom";
 import styles from "./App.module.scss";
 import { HomePage } from "./pages/home.page";
 import { HeroesPage } from "./pages/heroes.page";
+import { HeroPage } from "./pages/hero.page";
 import { Container } from "./components/Container/Container";
 
 export function App() {
@@ -24,6 +25,7 @@ export function App() {
           <Routes>
             <Route index element={<HomePage />} />
             <Route path="/heroes" element={<HeroesPage />} />
+            <Route path="/hero/:id" element={<HeroPage />} />
           </Routes>
         </Container>
       </main>

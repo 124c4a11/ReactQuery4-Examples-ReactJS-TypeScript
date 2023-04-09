@@ -1,22 +1,19 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { useHeroesData } from "../hooks/useHeroesData";
 import { IHero } from "../types/IHero";
+import { Link } from "react-router-dom";
 
-const onSuccess = (data: string[]) =>
+const onSuccess = (data: IHero[]) =>
   console.log("Perform side effect after data fetching", data);
 
 const onError = (error: AxiosError) =>
   console.log("Perform side effect after encountering error", error);
 
-const select = (data: AxiosResponse<IHero[]>) => {
-  const heroNames = data.data.map(({ name }) => name);
-
-  return heroNames;
-};
+const select = (data: AxiosResponse<IHero[]>) => data.data;
 
 export function HeroesPage() {
   const { data, isInitialLoading, isError, error, refetch } = useHeroesData({
-    enabled: false,
+    // enabled: false,
     onError,
     onSuccess,
     select,
@@ -26,7 +23,7 @@ export function HeroesPage() {
     <>
       <h1>Heroes Page</h1>
 
-      <button onClick={() => refetch()}>Fetch Heroes</button>
+      {/* <button onClick={() => refetch()}>Fetch Heroes</button> */}
 
       {isInitialLoading ? (
         <h2>Loading...</h2>
@@ -36,8 +33,10 @@ export function HeroesPage() {
         <>
           {!!data?.length && (
             <ul>
-              {data.map((name) => (
-                <li key={name}>{name}</li>
+              {data.map(({ id, name }) => (
+                <li key={id}>
+                  <Link to={`/hero/${id}`}>{name}</Link>
+                </li>
               ))}
             </ul>
           )}
