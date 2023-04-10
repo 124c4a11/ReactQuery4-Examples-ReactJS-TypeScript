@@ -28,7 +28,7 @@ export function HeroesPage() {
       {isInitialLoading ? (
         <h2>Loading...</h2>
       ) : isError ? (
-        <h2>{(error as AxiosError).message}</h2>
+        <h2>{error.message}</h2>
       ) : (
         <>
           {!!data?.length && (
