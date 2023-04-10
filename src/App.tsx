@@ -4,6 +4,7 @@ import { HomePage } from "./pages/home.page";
 import { HeroesPage } from "./pages/heroes.page";
 import { HeroPage } from "./pages/hero.page";
 import { Container } from "./components/Container/Container";
+import { DynamicParallelQueriesPage } from "./pages/dynamic-parallel-queries.page";
 
 export function App() {
   return (
@@ -17,6 +18,9 @@ export function App() {
             <li className={styles["navbar__menu-item"]}>
               <Link to="/heroes">Heroes</Link>
             </li>
+            <li className={styles["navbar__menu-item"]}>
+              <Link to="/parallel">Dynamic Parallel</Link>
+            </li>
           </ul>
         </Container>
       </nav>
@@ -26,6 +30,10 @@ export function App() {
             <Route index element={<HomePage />} />
             <Route path="/heroes" element={<HeroesPage />} />
             <Route path="/hero/:id" element={<HeroPage />} />
+            <Route
+              path="/parallel"
+              element={<DynamicParallelQueriesPage heroIDs={["1", "2"]} />}
+            />
           </Routes>
         </Container>
       </main>
