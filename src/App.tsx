@@ -6,6 +6,7 @@ import { HeroPage } from "./pages/hero.page";
 import { Container } from "./components/Container/Container";
 import { DynamicParallelQueriesPage } from "./pages/dynamic-parallel-queries.page";
 import { DependentQueriesPage } from "./pages/dependent-queries.page";
+import { PaginatedQueries } from "./pages/paginated-queries";
 
 export function App() {
   return (
@@ -25,6 +26,9 @@ export function App() {
             <li className={styles["navbar__menu-item"]}>
               <Link to="/dependent">Dependent Parallel</Link>
             </li>
+            <li className={styles["navbar__menu-item"]}>
+              <Link to="/paginated">Paginated</Link>
+            </li>
           </ul>
         </Container>
       </nav>
@@ -42,6 +46,7 @@ export function App() {
               path="/dependent"
               element={<DependentQueriesPage email="vishwas@example.com" />}
             />
+            <Route path="/paginated" element={<PaginatedQueries />} />
           </Routes>
         </Container>
       </main>
