@@ -8,7 +8,7 @@ const fetchColors = (pageNumber: number) =>
     `http://localhost:4000/colors?_limit=2&_page=${pageNumber}`
   );
 
-export function PaginatedQueries() {
+export function PaginatedQueriesPage() {
   const [pageNumber, setPageNumber] = useState<number>(1);
 
   const { data, isLoading, isError, error } = useQuery({

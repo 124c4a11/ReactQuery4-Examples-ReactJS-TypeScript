@@ -1,4 +1,4 @@
-import { Router, Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import styles from "./App.module.scss";
 import { HomePage } from "./pages/home.page";
 import { HeroesPage } from "./pages/heroes.page";
@@ -6,7 +6,8 @@ import { HeroPage } from "./pages/hero.page";
 import { Container } from "./components/Container/Container";
 import { DynamicParallelQueriesPage } from "./pages/dynamic-parallel-queries.page";
 import { DependentQueriesPage } from "./pages/dependent-queries.page";
-import { PaginatedQueries } from "./pages/paginated-queries";
+import { PaginatedQueriesPage } from "./pages/paginated-queries";
+import { InfiniteQueriesPage } from "./pages/infinite-queries.page";
 
 export function App() {
   return (
@@ -29,6 +30,9 @@ export function App() {
             <li className={styles["navbar__menu-item"]}>
               <Link to="/paginated">Paginated</Link>
             </li>
+            <li className={styles["navbar__menu-item"]}>
+              <Link to="/Infinite">Infinite</Link>
+            </li>
           </ul>
         </Container>
       </nav>
@@ -46,7 +50,8 @@ export function App() {
               path="/dependent"
               element={<DependentQueriesPage email="vishwas@example.com" />}
             />
-            <Route path="/paginated" element={<PaginatedQueries />} />
+            <Route path="/paginated" element={<PaginatedQueriesPage />} />
+            <Route path="/infinite" element={<InfiniteQueriesPage />} />
           </Routes>
         </Container>
       </main>
