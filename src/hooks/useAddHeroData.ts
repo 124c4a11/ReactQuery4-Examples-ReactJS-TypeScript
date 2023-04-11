@@ -10,8 +10,26 @@ export const useAddHeroData = () => {
 
   return useMutation({
     mutationFn: addHero,
-    onSuccess: (data) => {
-      // queryClient.invalidateQueries(["heroes"]);
+
+    // onSuccess: (data) => {
+    //   // queryClient.invalidateQueries(["heroes"]);
+
+    //   queryClient.setQueryData<AxiosResponse<IHero[]> | undefined>(
+    //     ["heroes"],
+    //     (oldQueryData) =>
+    //       oldQueryData
+    //         ? {
+    //             ...oldQueryData,
+    //             data: [...oldQueryData.data, data.data],
+    //           }
+    //         : oldQueryData
+    //   );
+    // },
+
+    onMutate: async (newHero) => {
+      await queryClient.cancelQueries(["heroes"]);
+
+      const prevHeroData = queryClient.getQueryData(["heroes"]);
 
       queryClient.setQueryData<AxiosResponse<IHero[]> | undefined>(
         ["heroes"],
@@ -19,10 +37,26 @@ export const useAddHeroData = () => {
           oldQueryData
             ? {
                 ...oldQueryData,
-                data: [...oldQueryData.data, data.data],
+                data: [
+                  ...oldQueryData.data,
+                  {
+                    id: oldQueryData?.data?.length + 1,
+                    ...newHero,
+                  },
+                ],
               }
             : oldQueryData
       );
+
+      return { prevHeroData };
+    },
+
+    onError: (_error, _hero, context) => {
+      queryClient.setQueryData(["heroes"], context?.prevHeroData);
+    },
+
+    onSettled: () => {
+      queryClient.invalidateQueries(["heroes"]);
     },
   });
 };

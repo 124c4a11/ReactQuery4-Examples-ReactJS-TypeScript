@@ -14,11 +14,6 @@
       "id": 3,
       "name": "Wonder Woman",
       "alterEgo": "Princess Diana"
-    },
-    {
-      "name": "The Flash",
-      "alterEgo": "Barry",
-      "id": 4
     }
   ],
   "friends": [
@@ -44,11 +39,7 @@
   "channels": [
     {
       "id": "codevolution",
-      "courses": [
-        "react",
-        "vue",
-        "angular"
-      ]
+      "courses": ["react", "vue", "angular"]
     }
   ],
   "colors": [
